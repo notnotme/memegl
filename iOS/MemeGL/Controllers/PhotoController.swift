@@ -118,11 +118,13 @@ class PhotoController: UIViewController, UICollectionViewDelegate {
         let president = Int.random(in: 0..<President.data.count)
 
         // Offset mask selector by its size to hide in at the begining
-        // I don't know how to to it from Storyboard
+        // Take care of hiding it below the system bottom bar
+        let guide = view.safeAreaLayoutGuide
+        let bottomSpace = view.frame.height - guide.layoutFrame.height
         if let presidentCollectionView = presidentCollectionView {
             presidentCollectionView.transform = CGAffineTransform(
                 translationX: 0,
-                y: 200 // View is not yet inflated, so take the value from the storyboard
+                y: presidentCollectionView.frame.height + bottomSpace
             )
             
             // Disallow multiple selection and set data source and load a president
@@ -205,7 +207,7 @@ class PhotoController: UIViewController, UICollectionViewDelegate {
             }
         }
         
-        // Remove the face detection receiver and Stop camera 
+        // Remove the face detection receiver and Stop camera
         guard let glController = glController else {
             fatalError("Nil glController.")
         }
@@ -504,9 +506,13 @@ class PhotoController: UIViewController, UICollectionViewDelegate {
                     return
                 }
                 if maskSelectorVisible {
+                    // Hide the selector below the system bottom bar
+                    // Take care of hiding it below the system bottom bar
+                    let guide = view.safeAreaLayoutGuide
+                    let bottomSpace = view.frame.height - guide.layoutFrame.height
                     presidentCollectionView.transform = CGAffineTransform(
                         translationX: 0,
-                        y: presidentCollectionView.contentSize.height
+                        y: presidentCollectionView.frame.height + bottomSpace
                     )
                 } else {
                     presidentCollectionView.transform = CGAffineTransform(

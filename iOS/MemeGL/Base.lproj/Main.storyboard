@@ -243,34 +243,34 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BIG-LZ-VIT">
-                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="427" width="375" height="240"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="oxH-Jq-fmN"/>
+                                    <constraint firstAttribute="height" constant="240" id="oxH-Jq-fmN"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="4" minimumInteritemSpacing="4" id="EET-x8-rso">
-                                    <size key="itemSize" width="150" height="192"/>
+                                    <size key="itemSize" width="160" height="232"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PresidentViewCell" id="eyh-Ii-Lio" customClass="PresidentCollectionViewCell" customModule="MemeGL" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="4" width="150" height="192"/>
+                                        <rect key="frame" x="0.0" y="4" width="160" height="232"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="faX-RG-CK8">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="192"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="160" height="232"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOX-D1-0qj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="192"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="232"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="192" id="G0U-ra-7GX"/>
                                                         <constraint firstAttribute="width" constant="150" id="vjV-EI-Q1Q"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNp-0h-yym">
-                                                    <rect key="frame" x="0.0" y="162" width="150" height="30"/>
+                                                    <rect key="frame" x="0.0" y="202" width="160" height="30"/>
                                                     <color key="backgroundColor" white="1" alpha="0.75478316326530615" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="eeY-2n-Ijn"/>
@@ -280,7 +280,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flag" translatesAutoresizingMaskIntoConstraints="NO" id="228-xa-5cj">
-                                                    <rect key="frame" x="121" y="8" width="21" height="16"/>
+                                                    <rect key="frame" x="131" y="8" width="21" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="21" id="Aac-cv-Sjp"/>
                                                         <constraint firstAttribute="height" constant="16" id="ZvU-79-GL7"/>

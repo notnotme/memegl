@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  MemeGL
+
+  Created by Romain Graillot on 26/12/2021.
+  
+*/
+
+"menu.share" = "Share";
+
+"menu.about" = "About";
+
+"menu.store" = "App Store";
+
+"menu.preferences" = "Preferences";
+
+"alert.cameraAccess.title" = "Camera access";
+
+"alert.cameraAccess.message" = "To use this application you must allow it to access you camera devices.";
+
+"alert.microphoneAccess.title" = "Microphone access";
+
+"alert.microphoneAccess.message" = "To use this application you must allow it to access the microphone.";
+
+"button.ok" = "OK";
+
+"photo" = "PHOTO";
+
+"video" = "VIDEO";
+

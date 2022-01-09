@@ -1,0 +1,35 @@
+/* Class = "UILabel"; text = "Source code"; ObjectID = "4Ae-g1-Y4l"; */
+"4Ae-g1-Y4l.text" = "Code Source";
+
+/* Class = "UILabel"; text = "Quick selector"; ObjectID = "D96-5J-Ggy"; */
+"D96-5J-Ggy.text" = "Sélécteur rapide";
+
+/* Class = "UINavigationItem"; title = "Share"; ObjectID = "DdH-Vz-Svp"; */
+"DdH-Vz-Svp.title" = "Partage";
+
+/* Class = "UILabel"; text = "No face detected in the camera field of view."; ObjectID = "IW0-Q7-hr1"; */
+"IW0-Q7-hr1.text" = "Aucun visage dans le champ de vision de la caméra…";
+
+/* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "KJW-Tg-0UO"; */
+"KJW-Tg-0UO.title" = "Préférences";
+
+/* Class = "UILabel"; text = "This option closes the mask selector when you click on the area above the selector."; ObjectID = "P2o-cz-fgB"; */
+"P2o-cz-fgB.text" = "Cette option ferme le sélecteur de masque quand vous cliquez sur la zone du meme.";
+
+/* Class = "UILabel"; text = "Privacy policy"; ObjectID = "TF0-5k-RdA"; */
+"TF0-5k-RdA.text" = "Politique de confidentialité";
+
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "b8L-2U-YLz"; */
+"b8L-2U-YLz.title" = "À propos";
+
+/* Class = "UIButton"; configuration.title = "PHOTO"; ObjectID = "gtg-Qh-93a"; */
+"gtg-Qh-93a.configuration.title" = "PHOTO";
+
+/* Class = "UILabel"; text = "This option scale the meme image to mak it full screen."; ObjectID = "hzR-hD-LAB"; */
+"hzR-hD-LAB.text" = "Cette option zoom l'image du meme afun qu'elle remplisse l'écran.";
+
+/* Class = "UINavigationItem"; title = "Meme Présidents"; ObjectID = "oMP-in-KQK"; */
+"oMP-in-KQK.title" = "Meme Présidents";
+
+/* Class = "UILabel"; text = "Zoom image"; ObjectID = "uup-gA-TL6"; */
+"uup-gA-TL6.text" = "Zoom sur image";

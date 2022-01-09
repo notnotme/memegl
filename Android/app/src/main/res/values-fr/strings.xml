@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="credits">
+        <![CDATA[
+        L\'encodage vidéo utilise une partie du code écrit par David Evans (@spaceLenny) qui est disponible sur github à cette addresse:\n
+        https://github.com/spaceLenny/recordablesurfaceview
+        ]]>
+    </string>
+
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="source_code">Code source</string>
+
+    <string name="action_share_app">Partager l\'application</string>
+    <string name="action_rate_app">Fiche Google Play</string>
+    <string name="action_preferences">Paramètres</string>
+    <string name="action_about">À propos</string>
+    <string name="finish">Fermer</string>
+    <string name="video">Video</string>
+    <string name="photo">Photo</string>
+    <string name="back">Retour</string>
+    <string name="version">Version: %s</string>
+    <string name="mode">Mode</string>
+    <string name="masks">Masques</string>
+    <string name="photo_mode">Mode photo</string>
+    <string name="video_mode">Mode video</string>
+    <string name="face_hint">Aucun visage dans le champ de vision de la caméra…</string>
+
+    <string name="permission_camera_rationale">L\'accée à la caméra est nécessaire pour utilisez votre visage dans l\'application.</string>
+    <string name="permission_camera_denied">L\'application ne peut pas fonctionner sans l\'accée à la caméra.</string>
+    <string name="permission_micro_rationale">Le microphone est nécessaire pour l\'enregistrement de votre voix pendant la vidéo.</string>
+    <string name="permission_micro_denied">L\'enregistrement de vidéos ne peut pas fonctionner sans le microphone.</string>
+    <string name="error_loading_file">Quelque chose c\'est mal passé, l\'image ne peut être chargée :(</string>
+
+    <string name="desc_camera_button">Prend une photo, démarre ou stop la vidéo.</string>
+    <string name="desc_mask_button">Changer de masque</string>
+    <string name="desc_mode_button">Changer le mode de prise de vue</string>
+    <string name="desc_mask_selector_item">Masque</string>
+    <string name="desc_preview_image">Aperçu de l\'image</string>
+    <string name="desc_logo">Logo de l\'application</string>
+    <string name="desc_share_button">Partager le résultat</string>
+    <string name="desc_preview_video">Aperçu de la vidéo</string>
+    <string name="desc_helper_icon">Aide</string>
+    <string name="desc_camera_preview">Aperçue de la caméra</string>
+    <string name="desc_camera_switch_button">Change la caméra utilisée</string>
+
+</resources>

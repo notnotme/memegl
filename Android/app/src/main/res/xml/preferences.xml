@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        app:key="@string/preference_auto_close_mask_selector_key"
+        app:title="@string/preference_auto_close_mask_selector_title"
+        app:summary="@string/preference_auto_close_mask_selector_summary"
+        app:defaultValue="true"/>
+
+    <SwitchPreferenceCompat
+        app:key="@string/preference_image_zoom_key"
+        app:title="@string/preference_show_complete_image_title"
+        app:summary="@string/preference_show_complete_image_summary"
+        app:defaultValue="false"/>
+
+</PreferenceScreen>

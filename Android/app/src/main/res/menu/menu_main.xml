@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.notnotme.meme.MainActivity">
+    <item
+        android:id="@+id/action_share_app"
+        android:title="@string/action_share_app"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_googleplay_sheet"
+        android:title="@string/action_rate_app"
+        app:showAsAction="never"/>
+    <group android:id="@+id/navigation">
+        <item
+            android:id="@+id/action_preferences"
+            android:title="@string/action_preferences"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/action_about_us"
+            android:title="@string/action_about"
+            app:showAsAction="never"/>
+    </group>
+</menu>

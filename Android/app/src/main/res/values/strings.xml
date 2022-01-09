@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" translatable="false">Meme Présidents</string>
+    <string name="share_app_text" translatable="false">https://play.google.com/store/apps/details?id=com.notnotme.memegl</string>
+
+    <string name="name_arthaud" translatable="false">N. ARTHAUD</string>
+    <string name="name_melenchon" translatable="false">J.-L. MELENCHON</string>
+    <string name="name_lepen" translatable="false">M. LEPEN</string>
+    <string name="name_dupont_aignan" translatable="false">N. DUPONT-AIGNAN</string>
+    <string name="name_poutou" translatable="false">P. POUTOU</string>
+    <string name="name_roussel" translatable="false">F. ROUSSEL</string>
+    <string name="name_hidalgo" translatable="false">A. HIDALGO</string>
+    <string name="name_jadot" translatable="false">Y. JADOT</string>
+    <string name="name_montebourg" translatable="false">A. MONTEBOURG</string>
+    <string name="name_pecresse" translatable="false">V. PÉCRESSE</string>
+    <string name="name_macron" translatable="false">E. MACRON</string>
+    <string name="name_zemmour" translatable="false">E. ZEMMOUR</string>
+
+    <string name="credits">
+        <![CDATA[
+        Video encoding is possible thanks to the prior work of David Evans (@spaceLenny) which can be found at this address:\n
+        https://github.com/spaceLenny/recordablesurfaceview
+        ]]>
+    </string>
+
+    <string name="privacy_policy_link" translatable="false">https://raw.githubusercontent.com/notnotme/memegl/main/PRIVACY</string>
+    <string name="source_code_link" translatable="false">https://github.com/notnotme/memegl</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="source_code">Source code</string>
+
+    <string name="action_share_app">Share this app</string>
+    <string name="action_rate_app">Google Play sheet</string>
+    <string name="action_preferences">Preferences</string>
+    <string name="action_about">About</string>
+    <string name="video">Video</string>
+    <string name="photo">Photo</string>
+    <string name="finish">Finish</string>
+    <string name="back">Back</string>
+    <string name="version">Version: %s</string>
+    <string name="mode">Mode</string>
+    <string name="masks">Masks</string>
+    <string name="photo_mode">Photo mode</string>
+    <string name="video_mode">Video mode</string>
+    <string name="face_hint">No face in the field of view of the camera…</string>
+
+    <string name="permission_camera_rationale">The camera permission is needed to show your face in the application.</string>
+    <string name="permission_camera_denied">The application cannot work without the camera access.</string>
+    <string name="permission_micro_rationale">The microphone permission is needed to record your voice while recording a video.</string>
+    <string name="permission_micro_denied">Video recording don\'t work withouyt microphone access.</string>
+    <string name="error_loading_file">Something went wrong, the media file cannot be loaded :(</string>
+
+
+    <string name="desc_camera_button">Take, start, or end a video</string>
+    <string name="desc_mask_button">Change mask</string>
+    <string name="desc_mode_button">Change mode</string>
+    <string name="desc_mask_selector_item">Mask</string>
+    <string name="desc_preview_image">Preview image result</string>
+    <string name="desc_logo">Application logo</string>
+    <string name="desc_share_button">Share the result</string>
+    <string name="desc_preview_video">Preview video result</string>
+    <string name="desc_helper_icon">Helper</string>
+    <string name="desc_camera_preview">Camera preview</string>
+    <string name="desc_camera_switch_button">Switch the camera in use</string>
+
+</resources>

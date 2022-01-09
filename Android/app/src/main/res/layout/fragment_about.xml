@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.about.AboutFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.MyTheme.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextAppearance.MyTheme.Caption"
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_4"
+            android:layout_marginTop="@dimen/keyline_4"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="version: 49.3" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/logoCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="@dimen/cardview_default_elevation"
+            app:cardCornerRadius="@dimen/cardview_default_radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/versionText">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/desc_logo"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_launcher_foreground" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/privacyPolicyLabel"
+            style="@style/TextAppearance.MyTheme.Headline6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/keyline_5"
+            android:gravity="center"
+            android:text="@string/privacy_policy"
+            app:layout_constraintTop_toBottomOf="@id/logoCard" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/privacyPolicy"
+            style="@style/TextAppearance.MyTheme.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/keyline_2"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:gravity="center"
+            android:text="@string/privacy_policy_link"
+            app:layout_constraintTop_toBottomOf="@id/privacyPolicyLabel" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sourceCodeLabel"
+            style="@style/TextAppearance.MyTheme.Headline6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/keyline_5"
+            android:gravity="center"
+            android:text="@string/source_code"
+            app:layout_constraintTop_toBottomOf="@id/privacyPolicy" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sourceCode"
+            style="@style/TextAppearance.MyTheme.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/keyline_2"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:gravity="center"
+            android:text="@string/source_code_link"
+            app:layout_constraintTop_toBottomOf="@id/sourceCodeLabel" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/appCredits"
+            style="@style/TextAppearance.MyTheme.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_4"
+            android:layout_marginEnd="@dimen/keyline_4"
+            android:layout_marginTop="@dimen/keyline_6"
+            android:layout_marginBottom="@dimen/keyline_4"
+            android:gravity="center"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:text="@string/credits"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sourceCode" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+

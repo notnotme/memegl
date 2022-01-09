@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/cameraFragment">
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.notnotme.memegl.fragment.camera.CameraFragment"
+        tools:layout="@layout/fragment_camera"
+        android:label="@string/app_name" >
+        <action
+            android:id="@+id/action_cameraFragment_to_shareFragment"
+            app:destination="@id/shareFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/bottom_sheet_slide_out" />
+        <action
+            android:id="@+id/action_cameraFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/bottom_sheet_slide_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/bottom_sheet_slide_out" />
+        <action
+            android:id="@+id/action_cameraFragment_to_preferenceFragment"
+            app:destination="@id/preferenceFragment"
+            app:enterAnim="@anim/bottom_sheet_slide_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/bottom_sheet_slide_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.notnotme.memegl.fragment.share.ShareFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_share">
+        <argument
+            android:name="filename"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="mediaType"
+            app:argType="com.notnotme.memegl.fragment.share.ShareFragmentViewModel$Companion$MediaType" />
+        <action
+            android:id="@+id/action_shareFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/bottom_sheet_slide_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/bottom_sheet_slide_out" />
+        <action
+            android:id="@+id/action_shareFragment_to_preferenceFragment"
+            app:destination="@id/preferenceFragment"
+            app:enterAnim="@anim/bottom_sheet_slide_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/bottom_sheet_slide_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.notnotme.memegl.fragment.about.AboutFragment"
+        android:label="@string/action_about"
+        tools:layout="@layout/fragment_about"/>
+
+    <fragment
+        android:id="@+id/preferenceFragment"
+        android:name="com.notnotme.memegl.fragment.preference.PreferenceFragment"
+        android:label="@string/action_preferences"/>
+
+</navigation>

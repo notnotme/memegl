@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="preference_auto_close_mask_selector_key" translatable="false">auto_close_mask_selector</string>
+    <string name="preference_auto_close_mask_selector_title">Quick selector</string>
+    <string name="preference_auto_close_mask_selector_summary">This option closes the mask selector when you click on the area above it.</string>
+
+    <string name="preference_image_zoom_key" translatable="false">show_complete_image</string>
+    <string name="preference_show_complete_image_title">Image zoom</string>
+    <string name="preference_show_complete_image_summary">This option scale the meme image to mak it appear full screen.</string>
+
+</resources>

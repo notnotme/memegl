@@ -1,0 +1,38 @@
+/* Class = "UILabel"; text = "Source code"; ObjectID = "4Ae-g1-Y4l"; */
+"4Ae-g1-Y4l.text" = "Source code";
+
+/* Class = "UILabel"; text = "Quick selector"; ObjectID = "D96-5J-Ggy"; */
+"D96-5J-Ggy.text" = "Quick selector";
+
+/* Class = "UINavigationItem"; title = "Share"; ObjectID = "DdH-Vz-Svp"; */
+"DdH-Vz-Svp.title" = "Share";
+
+/* Class = "UILabel"; text = "No face detected in the camera field of view."; ObjectID = "IW0-Q7-hr1"; */
+"IW0-Q7-hr1.text" = "No face detected in the camera field of view.";
+
+/* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "KJW-Tg-0UO"; */
+"KJW-Tg-0UO.title" = "Preferences";
+
+/* Class = "UILabel"; text = "This option closes the mask selector when you click on the area above the selector."; ObjectID = "P2o-cz-fgB"; */
+"P2o-cz-fgB.text" = "This option closes the mask selector when you click on the area above the selector.";
+
+/* Class = "UILabel"; text = "Privacy policy"; ObjectID = "TF0-5k-RdA"; */
+"TF0-5k-RdA.text" = "Privacy policy";
+
+/* Class = "UILabel"; text = "Meme Présidents"; ObjectID = "Ya7-va-hwJ"; */
+"Ya7-va-hwJ.text" = "Meme Présidents";
+
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "b8L-2U-YLz"; */
+"b8L-2U-YLz.title" = "About";
+
+/* Class = "UIButton"; configuration.title = "PHOTO"; ObjectID = "gtg-Qh-93a"; */
+"gtg-Qh-93a.configuration.title" = "PHOTO";
+
+/* Class = "UILabel"; text = "This option scale the meme image to mak it full screen."; ObjectID = "hzR-hD-LAB"; */
+"hzR-hD-LAB.text" = "This option scale the meme image to mak it full screen.";
+
+/* Class = "UINavigationItem"; title = "Meme Présidents"; ObjectID = "oMP-in-KQK"; */
+"oMP-in-KQK.title" = "Meme Présidents";
+
+/* Class = "UILabel"; text = "Zoom image"; ObjectID = "uup-gA-TL6"; */
+"uup-gA-TL6.text" = "Image zoom";

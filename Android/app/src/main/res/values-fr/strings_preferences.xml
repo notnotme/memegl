@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="preference_auto_close_mask_selector_title">Sélecteur rapide</string>
+    <string name="preference_auto_close_mask_selector_summary">Cette option ferme le sélecteur de masque quand vous cliquez sur la zone du meme.</string>
+
+    <string name="preference_show_complete_image_title">Zoom sur image</string>
+    <string name="preference_show_complete_image_summary">Cette option zoom l\'image du meme afun qu\'elle remplisse l\'écran.</string>
+
+</resources>

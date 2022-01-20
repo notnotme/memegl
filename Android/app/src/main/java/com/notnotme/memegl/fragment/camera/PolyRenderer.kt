@@ -432,7 +432,10 @@ open class PolyRenderer(
                 spriteHolder.rightEye.apply {
                     scale = mask.scale
                     angle = face.headEulerAngleZ
-                    position.set(landmark.position.x + offsetX, landmark.position.y + offsetY)
+                    position.set(
+                        landmark.position.x + offsetX,
+                        landmark.position.y + offsetY
+                    )
                 }
             }
 
@@ -440,7 +443,10 @@ open class PolyRenderer(
                 spriteHolder.leftEye.apply {
                     scale = mask.scale
                     angle = face.headEulerAngleZ
-                    position.set(landmark.position.x + offsetX, landmark.position.y + offsetY)
+                    position.set(
+                        landmark.position.x + offsetX,
+                        landmark.position.y + offsetY
+                    )
                 }
             }
 
@@ -452,7 +458,8 @@ open class PolyRenderer(
                         // Interpolate horizontal and vertical mouth position to find where to put the sprite
                         position.set(
                             ((llandmark.position.x + rlandmark.position.x) * 0.5f) + offsetX,
-                            ((llandmark.position.y + rlandmark.position.y) * 0.5f) + offsetY)
+                            ((llandmark.position.y + rlandmark.position.y) * 0.5f) + offsetY
+                        )
                     }
                 }
             }

@@ -389,7 +389,7 @@ open class PolyRenderer(
         }
     }
 
-    fun setUserFace(orientation: Float, scale: Float, face: Face?) {
+    fun updateUserLandmarks(orientation: Float, scale: Float, face: Face?) {
         spriteHolder.draw = face != null
         spriteHolder.textureOrientation = orientation
         spriteHolder.textureScale = scale
@@ -417,7 +417,7 @@ open class PolyRenderer(
         }
     }
 
-    fun setMaskData(mask: Mask, bitmap: Bitmap, face: Face) {
+    fun setMask(mask: Mask, bitmap: Bitmap, face: Face) {
         surfaceView?.queueEvent {
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, maskTexture.textureId)
             spriteHolder.mask.setSize(bitmap.width.toFloat(), bitmap.height.toFloat())

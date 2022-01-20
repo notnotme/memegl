@@ -742,7 +742,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                                     else -> null
                                 }
                                 viewModel.setUserFaceVisibleHint(face != null)
-                                renderer?.setUserFace(rotation, viewModel.cameraScale.value!!, face)
+                                renderer?.updateUserLandmarks(rotation, viewModel.cameraScale.value!!, face)
                             }
                         }
 
@@ -842,7 +842,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                     .addOnSuccessListener { faces ->
                         when (val r = renderer) {
                             null -> bitmap.recycle()
-                            else -> r.setMaskData(mask, bitmap, faces[0])
+                            else -> r.setMask(mask, bitmap, faces[0])
                         }
 
                         binding?.let {

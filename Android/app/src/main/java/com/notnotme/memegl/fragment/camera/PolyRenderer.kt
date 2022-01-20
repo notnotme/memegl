@@ -79,7 +79,10 @@ open class PolyRenderer(
             var rightEye: LandmarkSpriteInfo,
             var mouth: LandmarkSpriteInfo,
             var mask: Sprite,
-            var framebuffer: Sprite
+            var framebuffer: Sprite,
+            var draw: Boolean,
+            var textureScale: Float,
+            var textureOrientation: Float
         )
     }
 
@@ -114,7 +117,10 @@ open class PolyRenderer(
             size = Size(width.toFloat(), height.toFloat()),
             // Rendered surface result in a inverted texture, fix it now.
             texture = STUV(0.0f, 1.0f, 1.0f, 0.0f)
-        )
+        ),
+        draw = false,
+        textureScale = 1.0f,
+        textureOrientation = -90.0f
     )
 
     private var lastRenderTime = 0L
@@ -123,9 +129,6 @@ open class PolyRenderer(
     private var screenHeight = 0
     private var recorderWidth = 0
     private var recorderHeight = 0
-    private var drawLandmarkSprites = false
-    private var textureScale = 1.0f
-    private var textureOrientation = -90.0f
 
     private val frameBufferSprite = Sprite().also {
         it.setSize(width.toFloat(), height.toFloat())
@@ -204,7 +207,7 @@ open class PolyRenderer(
             render()
         }
 
-        if (drawLandmarkSprites) {
+        if (spriteHolder.draw) {
             if (updateCameraTexture.get()) {
                 // Update the camera texture with latest data when available (this will also bind the texture)
                 cameraSurfaceTexture.updateTexImage()
@@ -225,13 +228,13 @@ open class PolyRenderer(
 
                 reset()
                 computeUserSpriteTextureCenter(spriteHolder.leftEye, delta)
-                drawUserSprite(spriteHolder.leftEye, textureOrientation, textureScale)
+                drawUserLandmark(spriteHolder.leftEye, spriteHolder.textureOrientation, spriteHolder.textureScale)
 
                 computeUserSpriteTextureCenter(spriteHolder.rightEye, delta)
-                drawUserSprite(spriteHolder.rightEye, textureOrientation, textureScale)
+                drawUserLandmark(spriteHolder.rightEye, spriteHolder.textureOrientation, spriteHolder.textureScale)
 
                 computeUserSpriteTextureCenter(spriteHolder.mouth, delta)
-                drawUserSprite(spriteHolder.mouth, textureOrientation, textureScale)
+                drawUserLandmark(spriteHolder.mouth, spriteHolder.textureOrientation, spriteHolder.textureScale)
                 render()
             }            
         }
@@ -303,7 +306,7 @@ open class PolyRenderer(
         }
     }
 
-    private fun drawUserSprite(spriteInfo: LandmarkSpriteInfo, orientation: Float, textureScale: Float) {
+    private fun drawUserLandmark(spriteInfo: LandmarkSpriteInfo, orientation: Float, textureScale: Float) {
         val texelWidth = 1.0f / cameraTexture.height
         val texelHeight = 1.0f / cameraTexture.width
 
@@ -387,9 +390,9 @@ open class PolyRenderer(
     }
 
     fun setUserFace(orientation: Float, scale: Float, face: Face?) {
-        drawLandmarkSprites = face != null
-        textureOrientation = orientation
-        textureScale = scale
+        spriteHolder.draw = face != null
+        spriteHolder.textureOrientation = orientation
+        spriteHolder.textureScale = scale
         if (updateCameraTexture.get()) {
             face?.getLandmark(FaceLandmark.LEFT_EYE)?.let { landmark ->
                 spriteHolder.leftEye.textureNewPosition.set(

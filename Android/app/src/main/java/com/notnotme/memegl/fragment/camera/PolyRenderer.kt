@@ -18,7 +18,9 @@
  */
 package com.notnotme.memegl.fragment.camera
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.PointF
+import android.graphics.SurfaceTexture
 import android.opengl.GLES11Ext
 import android.opengl.GLES20
 import android.opengl.Matrix
@@ -29,12 +31,10 @@ import androidx.core.graphics.red
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.math.MathUtils
 import com.google.mlkit.vision.face.Face
-import com.google.mlkit.vision.face.FaceContour
 import com.google.mlkit.vision.face.FaceLandmark
 import com.notnotme.memegl.Mask
 import com.notnotme.memegl.renderer.GLRecorderSurfaceView
 import com.notnotme.memegl.renderer.graphic.*
-import com.notnotme.memegl.renderer.graphic.Color
 import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.Sprite
 import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.setPosition
 import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.setSTUV
@@ -54,6 +54,7 @@ open class PolyRenderer(
     companion object {
         const val TAG = "PolyRenderer"
 
+        private const val LERP_VALUE = 4.0f // * delta time
         private const val CIRCLE_PRECISION = 16 // segments from 360°
         private const val STEP_SIZE = 360.0f / CIRCLE_PRECISION
 
@@ -66,7 +67,8 @@ open class PolyRenderer(
 
         private data class LandmarkSpriteInfo(
             var position: PointF = PointF(),
-            var textureCenter: PointF = PointF(),
+            var texturePosition: PointF = PointF(),
+            var textureNewPosition: PointF = PointF(),
             var size: Size = Size(),
             var scale: Scale = Scale(),
             var angle: Float = 0.0f
@@ -115,6 +117,7 @@ open class PolyRenderer(
         )
     )
 
+    private var lastRenderTime = 0L
     private var backgroundColor = Color()
     private var screenWidth = 0
     private var screenHeight = 0
@@ -178,6 +181,10 @@ open class PolyRenderer(
     }
 
     override fun onDrawFrame() {
+        val now = System.currentTimeMillis()
+        val delta = (now - lastRenderTime) / 1000.0f
+        lastRenderTime = now
+
         // Render camera and sprites in a offscreen framebuffer
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, offScreenFrameBuffer.frameBufferId)
         GLES20.glViewport(0, 0, offScreenFrameBuffer.width, offScreenFrameBuffer.height)
@@ -206,6 +213,7 @@ open class PolyRenderer(
                 GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, cameraTexture.textureId)
             }
 
+
             GLES20.glEnable(GLES20.GL_BLEND)
             GLES20.glBlendEquationSeparate(GLES20.GL_FUNC_ADD, GLES20.GL_FUNC_ADD)
             GLES20.glBlendFuncSeparate(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA, GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)
@@ -216,8 +224,13 @@ open class PolyRenderer(
                 spriteShaderOES.setMatrix(offscreenMVP)
 
                 reset()
+                computeUserSpriteTextureCenter(spriteHolder.leftEye, delta)
                 drawUserSprite(spriteHolder.leftEye, textureOrientation, textureScale)
+
+                computeUserSpriteTextureCenter(spriteHolder.rightEye, delta)
                 drawUserSprite(spriteHolder.rightEye, textureOrientation, textureScale)
+
+                computeUserSpriteTextureCenter(spriteHolder.mouth, delta)
                 drawUserSprite(spriteHolder.mouth, textureOrientation, textureScale)
                 render()
             }            
@@ -302,13 +315,13 @@ open class PolyRenderer(
         // Depending if the front or back camera is used, texture orientation
         // is mirrored and we need to adjust it
         val xPositionInTexture = when {
-            isFrontCamera -> 1.0f - spriteInfo.textureCenter.x / cameraTexture.height
-            else -> spriteInfo.textureCenter.x / cameraTexture.height
+            isFrontCamera -> 1.0f - spriteInfo.texturePosition.x / cameraTexture.height
+            else -> spriteInfo.texturePosition.x / cameraTexture.height
         }
 
         val yPositionInTexture = when {
-            isFrontCamera -> spriteInfo.textureCenter.y / cameraTexture.width
-            else -> 1.0f - spriteInfo.textureCenter.y / cameraTexture.width
+            isFrontCamera -> spriteInfo.texturePosition.y / cameraTexture.width
+            else -> 1.0f - spriteInfo.texturePosition.y / cameraTexture.width
         }
 
         var step = 0.0f
@@ -379,23 +392,20 @@ open class PolyRenderer(
         textureScale = scale
         if (updateCameraTexture.get()) {
             face?.getLandmark(FaceLandmark.LEFT_EYE)?.let { landmark ->
-                computeUserSpriteTextureCenter(
-                    spriteHolder.leftEye,
+                spriteHolder.leftEye.textureNewPosition.set(
                     landmark.position.x,
                     landmark.position.y
                 )
             }
             face?.getLandmark(FaceLandmark.RIGHT_EYE)?.let { landmark ->
-                computeUserSpriteTextureCenter(
-                    spriteHolder.rightEye,
+                spriteHolder.rightEye.textureNewPosition.set(
                     landmark.position.x,
                     landmark.position.y
                 )
             }
             face?.getLandmark(FaceLandmark.MOUTH_LEFT)?.let { llandmark ->
                 face.getLandmark(FaceLandmark.MOUTH_RIGHT)?.let { rlandmark ->
-                    computeUserSpriteTextureCenter(
-                        spriteHolder.mouth,
+                    spriteHolder.mouth.textureNewPosition.set(
                         MathUtils.lerp(llandmark.position.x, rlandmark.position.x, 0.5f),
                         MathUtils.lerp(llandmark.position.y, rlandmark.position.y, 0.5f)
                     )
@@ -410,12 +420,16 @@ open class PolyRenderer(
             spriteHolder.mask.setSize(bitmap.width.toFloat(), bitmap.height.toFloat())
             maskTexture.setPixels(bitmap, true)
 
+            // Add an offset to each position to center it on the render surface, to match
+            // the landmark position of the current mask
+            val offsetX = (frameBufferSprite.size.w * 0.5f) - (spriteHolder.mask.size.w * 0.5f)
+            val offsetY = (frameBufferSprite.size.h * 0.5f) - (spriteHolder.mask.size.h * 0.5f)
+
             face.getLandmark(FaceLandmark.RIGHT_EYE)?.let { landmark ->
                 spriteHolder.rightEye.apply {
                     scale = mask.scale
                     angle = face.headEulerAngleZ
-                }.also {
-                    computeUserSpritePosition(it, landmark.position.x, landmark.position.y)
+                    position.set(landmark.position.x + offsetX, landmark.position.y + offsetY)
                 }
             }
 
@@ -423,23 +437,19 @@ open class PolyRenderer(
                 spriteHolder.leftEye.apply {
                     scale = mask.scale
                     angle = face.headEulerAngleZ
-                }.also {
-                    computeUserSpritePosition(it, landmark.position.x, landmark.position.y)
+                    position.set(landmark.position.x + offsetX, landmark.position.y + offsetY)
                 }
             }
 
-            face.getLandmark(FaceLandmark.MOUTH_LEFT)?.let { mleft ->
-                face.getLandmark(FaceLandmark.MOUTH_RIGHT)?.let { mright ->
+            face.getLandmark(FaceLandmark.MOUTH_LEFT)?.let { llandmark ->
+                face.getLandmark(FaceLandmark.MOUTH_RIGHT)?.let { rlandmark ->
                     spriteHolder.mouth.apply {
                         scale = mask.scale
                         angle = face.headEulerAngleZ
-                    }.also {
-                        computeUserSpritePosition(
-                            it,
-                            // Interpolate horizontal and vertical mouth position to find where to put the sprite
-                            (mleft.position.x + mright.position.x) * 0.5f,
-                            (mleft.position.y + mright.position.y) * 0.5f
-                        )
+                        // Interpolate horizontal and vertical mouth position to find where to put the sprite
+                        position.set(
+                            ((llandmark.position.x + rlandmark.position.x) * 0.5f) + offsetX,
+                            ((llandmark.position.y + rlandmark.position.y) * 0.5f) + offsetY)
                     }
                 }
             }
@@ -488,34 +498,26 @@ open class PolyRenderer(
         }
     }
 
-    private fun computeUserSpriteTextureCenter(spriteInfo: LandmarkSpriteInfo, textureTargetPositionX: Float, textureTargetPositionY: Float) {
+    private fun computeUserSpriteTextureCenter(spriteInfo: LandmarkSpriteInfo, delta: Float) {
         if (updateCameraTexture.get()) {
-            //val distance = MathUtils.dist(spriteInfo.position.x, spriteInfo.position.y, textureTargetPositionX, textureTargetPositionY)
-            when (spriteInfo.textureCenter.x) {
-                0.0f /* || distance > 256 */ -> {
-                    spriteInfo.textureCenter.set(
-                        textureTargetPositionY,
-                        textureTargetPositionX
-                    )
-                }
-                else -> {
-                    // If we moved just a bit, move the sprites to the right place using a linear interpolation
-                    spriteInfo.textureCenter.set(
-                        MathUtils.lerp(spriteInfo.textureCenter.x, textureTargetPositionY, 0.5f),
-                        MathUtils.lerp(spriteInfo.textureCenter.y, textureTargetPositionX, 0.5f)
-                    )
+            spriteInfo.apply {
+                //val distance = MathUtils.dist(spriteInfo.position.x, spriteInfo.position.y, textureTargetPositionX, textureTargetPositionY)
+                when (texturePosition.x) {
+                    0.0f /* || distance > 256 */ -> {
+                        texturePosition.set(
+                            textureNewPosition.y,
+                            textureNewPosition.x
+                        )
+                    }
+                    else -> {
+                        // If we moved just a bit, move the sprites to the right place using a linear interpolation
+                        texturePosition.set(
+                            MathUtils.lerp(texturePosition.x, textureNewPosition.y, LERP_VALUE * delta),
+                            MathUtils.lerp(texturePosition.y, textureNewPosition.x, LERP_VALUE * delta)
+                        )
+                    }
                 }
             }
-        }
-    }
-
-    private fun computeUserSpritePosition(landmarkSpriteInfo: LandmarkSpriteInfo, positionX: Float, positionY: Float) {
-        landmarkSpriteInfo.position.run {
-            set(positionX, positionY)
-            offset(
-                (frameBufferSprite.size.w * 0.5f) - (spriteHolder.mask.size.w * 0.5f),
-                (frameBufferSprite.size.h * 0.5f) - (spriteHolder.mask.size.h * 0.5f)
-            )
         }
     }
 

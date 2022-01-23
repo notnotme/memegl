@@ -760,7 +760,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                                     val inputImageRotation = imageProxy.imageInfo.rotationDegrees
                                     val inputImage = InputImage.fromMediaImage(image, inputImageRotation)
 
-                                    successListener.rotation = inputImageRotation.toFloat()
+                                    successListener.rotation = -inputImageRotation.toFloat()
                                     completeListener.imageProxy = imageProxy
 
                                     faceDetectionTracking.process(inputImage)

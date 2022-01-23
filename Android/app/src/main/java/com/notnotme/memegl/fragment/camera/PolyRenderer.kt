@@ -62,8 +62,8 @@ open class PolyRenderer(
         // This also map directly to camera texture size, whatever the lens zoom is
         // That mean eye and mouth will not have the same texture content between devices.
         // TODO: Find a simple way to normalize texture mapping. ML Kit Contour detection may help.
-        private val eyeSize = Size(140.0F, 100.0f)
-        private val mouthSize = Size(150.0f, 230.0f)
+        private val eyeSize = Size(200.0F, 150.0f)
+        private val mouthSize = Size(180.0f, 270.0f)
 
         private data class LandmarkSpriteInfo(
             var position: PointF = PointF(),
@@ -71,7 +71,7 @@ open class PolyRenderer(
             var textureNewPosition: PointF = PointF(),
             var size: Size = Size(),
             var scale: Scale = Scale(),
-            var angle: Float = 0.0f
+            var orientation: Float = 0.0f
         )
 
         private data class SpriteHolder(
@@ -120,7 +120,7 @@ open class PolyRenderer(
         ),
         draw = false,
         textureScale = 1.0f,
-        textureOrientation = -90.0f
+        textureOrientation = 0.0f
     )
 
     private var lastRenderTime = 0L
@@ -348,7 +348,7 @@ open class PolyRenderer(
                 1.8f,
                 spriteInfo.scale.x,
                 spriteInfo.scale.y,
-                orientation - spriteInfo.angle,
+                orientation + spriteInfo.orientation,
                 spriteInfo.position.x,
                 spriteInfo.position.y
             )
@@ -364,7 +364,7 @@ open class PolyRenderer(
                 0.0f,
                 spriteInfo.scale.x,
                 spriteInfo.scale.y,
-                orientation - spriteInfo.angle,
+                orientation + spriteInfo.orientation,
                 spriteInfo.position.x,
                 spriteInfo.position.y
             )
@@ -380,7 +380,7 @@ open class PolyRenderer(
                 0.0f,
                 spriteInfo.scale.x,
                 spriteInfo.scale.y,
-                orientation - spriteInfo.angle,
+                orientation + spriteInfo.orientation,
                 spriteInfo.position.x,
                 spriteInfo.position.y
             )
@@ -431,7 +431,7 @@ open class PolyRenderer(
             face.getLandmark(FaceLandmark.RIGHT_EYE)?.let { landmark ->
                 spriteHolder.rightEye.apply {
                     scale = mask.scale
-                    angle = face.headEulerAngleZ
+                    orientation = face.headEulerAngleZ
                     position.set(
                         landmark.position.x + offsetX,
                         landmark.position.y + offsetY
@@ -442,7 +442,7 @@ open class PolyRenderer(
             face.getLandmark(FaceLandmark.LEFT_EYE)?.let { landmark ->
                 spriteHolder.leftEye.apply {
                     scale = mask.scale
-                    angle = face.headEulerAngleZ
+                    orientation = face.headEulerAngleZ
                     position.set(
                         landmark.position.x + offsetX,
                         landmark.position.y + offsetY
@@ -454,7 +454,7 @@ open class PolyRenderer(
                 face.getLandmark(FaceLandmark.MOUTH_RIGHT)?.let { rlandmark ->
                     spriteHolder.mouth.apply {
                         scale = mask.scale
-                        angle = face.headEulerAngleZ
+                        orientation = face.headEulerAngleZ
                         // Interpolate horizontal and vertical mouth position to find where to put the sprite
                         position.set(
                             ((llandmark.position.x + rlandmark.position.x) * 0.5f) + offsetX,

@@ -234,8 +234,11 @@ class PolySpriteBuffer {
      * Put  a Sprite into the buffer
      */
     fun putSprite(sprite: Sprite) {
+        val sizeX = sprite.size.w * 0.5f
+        val sizeY = sprite.size.h * 0.5f
+
         putVertex(
-            -sprite.size.w, -sprite.size.h,
+            -sizeX, -sizeY,
             sprite.texture.s, sprite.texture.t,
             sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a,
             sprite.scale.x, sprite.scale.y,
@@ -244,7 +247,7 @@ class PolySpriteBuffer {
         )
 
         putVertex(
-            -sprite.size.w, sprite.size.h,
+            -sizeX, sizeY,
             sprite.texture.s, sprite.texture.v,
             sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a,
             sprite.scale.x, sprite.scale.y,
@@ -253,7 +256,7 @@ class PolySpriteBuffer {
         )
 
         putVertex(
-            sprite.size.w, sprite.size.h,
+            sizeX, sizeY,
             sprite.texture.u, sprite.texture.v,
             sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a,
             sprite.scale.x, sprite.scale.y,
@@ -262,7 +265,7 @@ class PolySpriteBuffer {
         )
 
         putVertex(
-            sprite.size.w, sprite.size.h,
+            sizeX, sizeY,
             sprite.texture.u, sprite.texture.v,
             sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a,
             sprite.scale.x, sprite.scale.y,
@@ -271,7 +274,7 @@ class PolySpriteBuffer {
         )
 
         putVertex(
-            sprite.size.w, -sprite.size.h,
+            sizeX, -sizeY,
             sprite.texture.u, sprite.texture.t,
             sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a,
             sprite.scale.x, sprite.scale.y,
@@ -280,7 +283,7 @@ class PolySpriteBuffer {
         )
 
         putVertex(
-            -sprite.size.w, -sprite.size.h,
+            -sizeX, -sizeY,
             sprite.texture.s, sprite.texture.t,
             sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a,
             sprite.scale.x, sprite.scale.y,
@@ -288,7 +291,6 @@ class PolySpriteBuffer {
             sprite.position.x, sprite.position.y
         )
     }
-
 
     /**
      * Put  a Vertex into the buffer

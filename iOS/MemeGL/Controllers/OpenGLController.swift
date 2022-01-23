@@ -38,14 +38,21 @@ class OpenGLController: GLKViewRecordableController {
     // This help rendering landmark sprites as they use a circle shape
     private static let CIRCLE_PRECISION = Float(16.0) // segments from 360°
     private static let STEP_SIZE = Float(360.0) / CIRCLE_PRECISION
-    
+
+    // Used to control landmark texture speed adjustment
+    private static let LERP_VALUE = Float(0.5)
+
     /// Store information about the face landmark sprites that we need to draw
     private struct LandmarkSpriteInfo {
         var position: Vector2<Float> = Vector2(
             Float.infinity,
             Float.infinity
         )
-        var textureCenter: Vector2<Float> = Vector2(
+        var texturePosition: Vector2<Float> = Vector2(
+            0.0,
+            0.0
+        )
+        var textureNewPosition: Vector2<Float> = Vector2(
             0.0,
             0.0
         )
@@ -178,6 +185,10 @@ class OpenGLController: GLKViewRecordableController {
             }
             
             spriteBuffer.begin()
+            computeUserSpriteTextureCenter(&spriteHolder.leftEye)
+            computeUserSpriteTextureCenter(&spriteHolder.rightEye)
+            computeUserSpriteTextureCenter(&spriteHolder.mouth)
+
             drawSprite(&spriteHolder.leftEye, textureScale, orientation)
             drawSprite(&spriteHolder.rightEye, textureScale, orientation)
             drawSprite(&spriteHolder.mouth, textureScale, orientation)
@@ -401,6 +412,25 @@ class OpenGLController: GLKViewRecordableController {
         let center = cachedPath.bounds
         return (Float(center.midX), Float(center.midY))
     }
+    
+    private func computeUserSpriteTextureCenter(_ spriteInfo: inout LandmarkSpriteInfo) {
+        if spriteInfo.texturePosition.x == 0.0 {
+            spriteInfo.texturePosition.x = spriteInfo.textureNewPosition.x
+            spriteInfo.texturePosition.y = spriteInfo.textureNewPosition.y
+        } else {
+            // If we moved just a bit, move the sprites to the right place using a linear interpolation
+            spriteInfo.texturePosition.x = Self.lerp(
+                spriteInfo.texturePosition.x,
+                spriteInfo.textureNewPosition.x,
+                Self.LERP_VALUE
+            )
+            spriteInfo.texturePosition.y = Self.lerp(
+                spriteInfo.texturePosition.y,
+                spriteInfo.textureNewPosition.y,
+                Self.LERP_VALUE
+            )
+        }
+    }
 
     private func drawSprite(_ spriteInfo: inout LandmarkSpriteInfo, _ textureScale: Float, _ orientation: Float) {
         let texelWidth = 1.0 / Float(cameraTexture.width)
@@ -411,8 +441,8 @@ class OpenGLController: GLKViewRecordableController {
         let widthInTexture = (Float(spriteInfo.size.x) * texelWidth) * 0.5
         let heightInTexture = (Float(spriteInfo.size.y) * texelHeight) * 0.5
 
-        let xPositionInTexture = 1.0 - spriteInfo.textureCenter.y / Float(cameraTexture.width)
-        let yPositionInTexture = spriteInfo.textureCenter.x / Float(cameraTexture.height)
+        let xPositionInTexture = 1.0 - spriteInfo.texturePosition.y / Float(cameraTexture.width)
+        let yPositionInTexture = spriteInfo.texturePosition.x / Float(cameraTexture.height)
 
         // Draw a sprite with N vertices doing a circle shape
         var step = Float(0.0)
@@ -547,53 +577,28 @@ class OpenGLController: GLKViewRecordableController {
             height: cameraTexture.width
         )
         
-        let interpolation = Float(0.5)
         if let leftEye = ob.landmarks?.leftEye {
             let textureCenter = getCenterOfPoints(
                 leftEye.pointsInImage(imageSize: imageSize)
             )
-            spriteHolder.leftEye.textureCenter.x = Self.lerp(
-                spriteHolder.leftEye.textureCenter.x,
-                textureCenter.x,
-                interpolation
-            )
-            spriteHolder.leftEye.textureCenter.y = Self.lerp(
-                spriteHolder.leftEye.textureCenter.y,
-                textureCenter.y,
-                interpolation
-            )
+            spriteHolder.leftEye.textureNewPosition.x = textureCenter.x
+            spriteHolder.leftEye.textureNewPosition.y = textureCenter.y
         }
         
         if let rightEye = ob.landmarks?.rightEye {
             let textureCenter = getCenterOfPoints(
                 rightEye.pointsInImage(imageSize: imageSize)
             )
-            spriteHolder.rightEye.textureCenter.x = Self.lerp(
-                spriteHolder.rightEye.textureCenter.x,
-                textureCenter.x,
-                interpolation
-            )
-            spriteHolder.rightEye.textureCenter.y = Self.lerp(
-                spriteHolder.rightEye.textureCenter.y,
-                textureCenter.y,
-                interpolation
-            )
+            spriteHolder.rightEye.textureNewPosition.x = textureCenter.x
+            spriteHolder.rightEye.textureNewPosition.y = textureCenter.y
         }
         
         if let outerLips = ob.landmarks?.outerLips {
             let textureCenter = getCenterOfPoints(
                 outerLips.pointsInImage(imageSize: imageSize)
             )
-            spriteHolder.mouth.textureCenter.x = Self.lerp(
-                spriteHolder.mouth.textureCenter.x,
-                textureCenter.x,
-                interpolation
-            )
-            spriteHolder.mouth.textureCenter.y = Self.lerp(
-                spriteHolder.mouth.textureCenter.y,
-                textureCenter.y,
-                interpolation
-            )
+            spriteHolder.mouth.textureNewPosition.x = textureCenter.x
+            spriteHolder.mouth.textureNewPosition.y = textureCenter.y
         }
     }
         

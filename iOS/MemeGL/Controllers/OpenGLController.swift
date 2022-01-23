@@ -168,10 +168,10 @@ class OpenGLController: GLKViewRecordableController {
                     return 0
                 }
                 switch (scene.interfaceOrientation) {
-                case .unknown, .portrait: return -90
-                case .landscapeLeft: return -180
+                case .unknown, .portrait: return 90
+                case .landscapeLeft: return 180
                 case .landscapeRight: return 0
-                case .portraitUpsideDown: return -270
+                case .portraitUpsideDown: return 270
                 @unknown default:
                     return 0
                 }
@@ -438,7 +438,7 @@ class OpenGLController: GLKViewRecordableController {
                 spriteInfo.scale.y,
                 spriteInfo.position.x,
                 spriteInfo.position.y,
-                orientation + spriteInfo.orientation
+                orientation - spriteInfo.orientation
             )
 
             spriteBuffer.putVertex(
@@ -454,7 +454,7 @@ class OpenGLController: GLKViewRecordableController {
                 spriteInfo.scale.y,
                 spriteInfo.position.x,
                 spriteInfo.position.y,
-                orientation + spriteInfo.orientation
+                orientation - spriteInfo.orientation
             )
 
             spriteBuffer.putVertex(
@@ -470,7 +470,7 @@ class OpenGLController: GLKViewRecordableController {
                 spriteInfo.scale.y,
                 spriteInfo.position.x,
                 spriteInfo.position.y,
-                orientation + spriteInfo.orientation
+                orientation - spriteInfo.orientation
             )
 
             step += 1

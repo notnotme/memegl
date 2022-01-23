@@ -36,23 +36,24 @@ final class SpriteProgram {
         varying vec2 v_texCoords;
         
         void main() {
-            mat3 scale_mat = mat3
-                (vScale.x,  0.0,            0.0,
-                 0.0,           vScale.y,   0.0,
-                 0.0,           0.0,            1.0);
-                 
             mat3 rotate_mat = mat3
-                (cos(vRotate), sin(vRotate), 0.0,
-                -sin(vRotate), cos(vRotate), 0.0,
-                 0.0,          0.0,          1.0);
-                 
+                (cos(vRotate), -sin(vRotate), 0.0,
+                 sin(vRotate), cos(vRotate), 0.0,
+                 0.0, 0.0, 1.0);
+
+            mat3 scale_mat = mat3
+                (vScale.x, 0.0, 0.0,
+                 0.0, vScale.y, 0.0,
+                 0.0, 0.0, 1.0);
+
             mat4 translate_mat = mat4
-                (1.0,          0.0,          0.0, 0.0,
-                 0.0,          1.0,          0.0, 0.0,
-                 0.0,          0.0,          1.0, 0.0,
+                (1.0, 0.0, 0.0, 0.0,
+                 0.0, 1.0, 0.0, 0.0,
+                 0.0, 0.0, 1.0, 0.0,
                  vTranslate.x, vTranslate.y, 0.0, 1.0);
                 
-            gl_Position  = uMat * translate_mat * vec4(rotate_mat * scale_mat * vec3(vPosition.xy, 0.0), 1.0);
+            vec4 transformed = translate_mat * vec4(rotate_mat * scale_mat * vec3(vPosition.xy, 0.0), 1.0);
+            gl_Position  = uMat * transformed;
             v_color      = vColor;
             v_texCoords  = vTexture;
         }

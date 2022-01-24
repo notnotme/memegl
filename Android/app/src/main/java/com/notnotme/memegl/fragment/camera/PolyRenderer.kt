@@ -62,7 +62,7 @@ open class PolyRenderer(
         // This also map directly to camera texture size, whatever the lens zoom is
         // That mean eye and mouth will not have the same texture content between devices.
         // TODO: Find a simple way to normalize texture mapping. ML Kit Contour detection may help.
-        private val eyeSize = Size(200.0F, 150.0f)
+        private val eyeSize = Size(200.0F, 140.0f)
         private val mouthSize = Size(180.0f, 270.0f)
 
         private data class LandmarkSpriteInfo(

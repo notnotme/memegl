@@ -35,11 +35,11 @@ enum class Mask(
     DAIGNANT    (R.mipmap.thumb_dupont_aignan,   R.mipmap.dupont_aignan, R.string.name_dupont_aignan,   Scale(0.65f)),
     HIDALGO     (R.mipmap.thumb_hidalgo,         R.mipmap.hidalgo,       R.string.name_hidalgo,         Scale(0.65f)),
     JADOT       (R.mipmap.thumb_jadot,           R.mipmap.jadot,         R.string.name_jadot,           Scale(0.6f)),
-    LEPEN       (R.mipmap.thumb_lepen,           R.mipmap.lepen,         R.string.name_lepen,           Scale(0.6f)),
+    LEPEN       (R.mipmap.thumb_lepen,           R.mipmap.lepen,         R.string.name_lepen,           Scale(0.65f)),
     MELENCHON   (R.mipmap.thumb_melenchon,       R.mipmap.melenchon,     R.string.name_melenchon,       Scale(0.85f)),
     MONTEBOURG  (R.mipmap.thumb_montebourg,      R.mipmap.montebourg,    R.string.name_montebourg,      Scale(0.5f)),
     PECRESSE    (R.mipmap.thumb_pecresse,        R.mipmap.pecresse,      R.string.name_pecresse,        Scale(0.8f)),
-    POUTOU      (R.mipmap.thumb_poutou,          R.mipmap.poutou,        R.string.name_poutou,          Scale(0.8f)),
+    POUTOU      (R.mipmap.thumb_poutou,          R.mipmap.poutou,        R.string.name_poutou,          Scale(0.7f)),
     ROUSSEL     (R.mipmap.thumb_roussel,         R.mipmap.roussel,       R.string.name_roussel,         Scale(0.65f)),
     ZEMMOUR     (R.mipmap.thumb_zemmour,         R.mipmap.zemmour,       R.string.name_zemmour,         Scale(0.7f)),
     MACRON      (R.mipmap.thumb_macron,          R.mipmap.macron,        R.string.name_macron,          Scale(1.0f))

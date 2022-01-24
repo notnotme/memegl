@@ -32,7 +32,7 @@ class OpenGLController: GLKViewRecordableController {
     // Drawing surface and sprite size never change size
     private static let FRAMEBUFFER_WIDTH = 720
     private static let FRAMEBUFFER_HEIGHT = 1280
-    private static let SPRITE_EYE_SIZE = Vector2<UInt>(200, 150)
+    private static let SPRITE_EYE_SIZE = Vector2<UInt>(200, 140)
     private static let SPRITE_MOUTH_SIZE = Vector2<UInt>(180, 270)
 
     // This help rendering landmark sprites as they use a circle shape

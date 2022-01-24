@@ -57,7 +57,7 @@ extension President {
             name: "M. LEPEN",
             image: UIImage(named: "lepen")!,
             thumbnail: UIImage(named: "thumb_lepen")!,
-            imageScale: Vector2(0.6)
+            imageScale: Vector2(0.65)
         ),
         President(
             name: "J.-L. MELENCHON",
@@ -81,7 +81,7 @@ extension President {
             name: "P. POUTOU",
             image: UIImage(named: "poutou")!,
             thumbnail: UIImage(named: "thumb_poutou")!,
-            imageScale: Vector2(0.6)
+            imageScale: Vector2(0.7)
         ),
         President(
             name: "F. ROUSSEL",
@@ -101,7 +101,6 @@ extension President {
             thumbnail: UIImage(named: "thumb_macron")!,
             imageScale: Vector2(1.0)
         )
-
     ]
     
 }

@@ -38,7 +38,7 @@ enum class Mask(
     LEPEN       (R.mipmap.thumb_lepen,           R.mipmap.lepen,         R.string.name_lepen,           Scale(0.6f)),
     MELENCHON   (R.mipmap.thumb_melenchon,       R.mipmap.melenchon,     R.string.name_melenchon,       Scale(0.85f)),
     MONTEBOURG  (R.mipmap.thumb_montebourg,      R.mipmap.montebourg,    R.string.name_montebourg,      Scale(0.5f)),
-    PECRESSE    (R.mipmap.thumb_pecresse,        R.mipmap.pecresse,      R.string.name_pecresse,        Scale(2.0f)),
+    PECRESSE    (R.mipmap.thumb_pecresse,        R.mipmap.pecresse,      R.string.name_pecresse,        Scale(0.8f)),
     POUTOU      (R.mipmap.thumb_poutou,          R.mipmap.poutou,        R.string.name_poutou,          Scale(0.8f)),
     ROUSSEL     (R.mipmap.thumb_roussel,         R.mipmap.roussel,       R.string.name_roussel,         Scale(0.65f)),
     ZEMMOUR     (R.mipmap.thumb_zemmour,         R.mipmap.zemmour,       R.string.name_zemmour,         Scale(0.7f)),

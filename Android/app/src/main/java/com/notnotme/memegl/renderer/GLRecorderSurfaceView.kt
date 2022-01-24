@@ -18,7 +18,6 @@
 package com.notnotme.memegl.renderer
 
 import android.content.Context
-import android.media.CamcorderProfile
 import android.media.MediaCodec
 import android.media.MediaRecorder
 import android.opengl.*

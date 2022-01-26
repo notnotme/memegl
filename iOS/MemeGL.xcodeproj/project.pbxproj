@@ -82,7 +82,6 @@
 		7A3A393227825BA000CFE3CF /* AVVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVVideoPlayer.swift; sourceTree = "<group>"; };
 		7A3C4B1B27835E31005CC5B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 		7A3C4B1D27835E6C005CC5B1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = Strings/fr.lproj/Info.plist; sourceTree = "<group>"; };
-		7A6CCBCA2784812C006C0B6E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Strings/en.lproj/Main.strings; sourceTree = "<group>"; };
 		7A6CCBCC2784815A006C0B6E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Strings/fr.lproj/Main.strings; sourceTree = "<group>"; };
 		7A7DB77827656261004F73FD /* Components.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		7AAAC8A8277B9E4F006C9540 /* GLKViewPlusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLKViewPlusController.swift; sourceTree = "<group>"; };
@@ -93,6 +92,7 @@
 		7ABE41C527602D0E00B11A6A /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		7ABE41C92760386600B11A6A /* PolySpriteBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolySpriteBuffer.swift; sourceTree = "<group>"; };
 		7ACC6F112783CF5800534E35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7AE5FFF727A14CBD008799BD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Strings/en.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,8 +442,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				7ACC6F112783CF5800534E35 /* Base */,
-				7A6CCBCA2784812C006C0B6E /* en */,
 				7A6CCBCC2784815A006C0B6E /* fr */,
+				7AE5FFF727A14CBD008799BD /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

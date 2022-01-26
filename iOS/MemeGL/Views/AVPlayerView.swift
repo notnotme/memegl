@@ -3,7 +3,7 @@
 //  MemeGL
 //
 // I took the code as it on a thread laying on Stackoverflow.
-// See https://stackoverflow.com/a/61425000
+// See answers from @hbk and @iKK https://stackoverflow.com/a/61425000
 // Thanks to the contributors of this thread.
 
 import AVFoundation

@@ -34,5 +34,8 @@
 /* Class = "UINavigationItem"; title = "Meme Présidents"; ObjectID = "oMP-in-KQK"; */
 "oMP-in-KQK.title" = "Meme Présidents";
 
-/* Class = "UILabel"; text = "Zoom image"; ObjectID = "uup-gA-TL6"; */
+/* Class = "UILabel"; text = "The video player used in the share screen use the code from @hbk and @iKK which can be found at"; ObjectID = "ktK-Hv-fqc"; */
+"ktK-Hv-fqc.text" = "The video player used in the share screen use the code from @hbk and @iKK which can be found at";
+
+/* Class = "UILabel"; text = "Image zoom"; ObjectID = "uup-gA-TL6"; */
 "uup-gA-TL6.text" = "Image zoom";

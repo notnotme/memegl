@@ -396,6 +396,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="https://raw.githubusercontent.com/notnotme/memegl/main/PRIVACY" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="j1a-mY-fOj">
                                 <rect key="frame" x="16" y="207.5" width="343" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="QKp-lU-wv9"/>
                                 </constraints>
@@ -413,8 +416,31 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="https://www.github.com/notnotme/memegl" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Zdu-dA-fZa">
                                 <rect key="frame" x="16" y="302" width="340" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="mIK-Dm-Qlt"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The video player used in the share screen use the code from @hbk and @iKK which can be found at" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktK-Hv-fqc">
+                                <rect key="frame" x="48" y="400" width="279" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="KJi-O9-IyO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="https://www.stackoverflow.com/a/61425000" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oRZ-eZ-jOl">
+                                <rect key="frame" x="16" y="458" width="343" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="CtR-Wt-6R2"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
@@ -426,11 +452,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4Ae-g1-Y4l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9qP-zF-QVX" secondAttribute="leading" constant="16" id="4NX-u7-Z8G"/>
+                            <constraint firstItem="9qP-zF-QVX" firstAttribute="trailing" secondItem="ktK-Hv-fqc" secondAttribute="trailing" constant="48" id="5iW-uG-Az3"/>
                             <constraint firstItem="j1a-mY-fOj" firstAttribute="top" secondItem="TF0-5k-RdA" secondAttribute="bottom" constant="8" id="7Yv-Sh-4WO"/>
                             <constraint firstItem="5y0-2Z-XnZ" firstAttribute="centerX" secondItem="Prb-eA-eYp" secondAttribute="centerX" id="FVV-IS-0cI"/>
                             <constraint firstItem="9qP-zF-QVX" firstAttribute="trailing" secondItem="Zdu-dA-fZa" secondAttribute="trailing" constant="19" id="J8W-il-8ko"/>
                             <constraint firstItem="9qP-zF-QVX" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ya7-va-hwJ" secondAttribute="trailing" constant="16" id="JMm-BU-PBr"/>
                             <constraint firstItem="x5c-gf-YIs" firstAttribute="top" secondItem="Ya7-va-hwJ" secondAttribute="bottom" constant="16" id="ObY-J0-sh6"/>
+                            <constraint firstItem="oRZ-eZ-jOl" firstAttribute="top" secondItem="ktK-Hv-fqc" secondAttribute="bottom" constant="8" id="Ptl-Ro-oxw"/>
                             <constraint firstItem="TF0-5k-RdA" firstAttribute="top" secondItem="5y0-2Z-XnZ" secondAttribute="bottom" constant="16" id="Qrl-oN-f5B"/>
                             <constraint firstItem="Ya7-va-hwJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9qP-zF-QVX" secondAttribute="leading" constant="16" id="Rkm-A1-PR6"/>
                             <constraint firstItem="9qP-zF-QVX" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="x5c-gf-YIs" secondAttribute="trailing" constant="16" id="V04-YL-X87"/>
@@ -445,10 +473,14 @@
                             <constraint firstItem="TF0-5k-RdA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9qP-zF-QVX" secondAttribute="leading" constant="16" id="iMJ-Vl-gC2"/>
                             <constraint firstItem="9qP-zF-QVX" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4Ae-g1-Y4l" secondAttribute="trailing" constant="16" id="iaU-T9-rZd"/>
                             <constraint firstItem="TF0-5k-RdA" firstAttribute="centerX" secondItem="Prb-eA-eYp" secondAttribute="centerX" id="k5Z-s2-PYJ"/>
+                            <constraint firstItem="oRZ-eZ-jOl" firstAttribute="leading" secondItem="9qP-zF-QVX" secondAttribute="leading" constant="16" id="kDn-H7-cZQ"/>
+                            <constraint firstItem="ktK-Hv-fqc" firstAttribute="top" secondItem="Zdu-dA-fZa" secondAttribute="bottom" constant="48" id="mbQ-IO-weG"/>
                             <constraint firstItem="Zdu-dA-fZa" firstAttribute="top" secondItem="4Ae-g1-Y4l" secondAttribute="bottom" constant="8" id="ntx-Zm-0I8"/>
                             <constraint firstItem="Ya7-va-hwJ" firstAttribute="centerX" secondItem="Prb-eA-eYp" secondAttribute="centerX" id="oor-w3-Rs5"/>
+                            <constraint firstItem="ktK-Hv-fqc" firstAttribute="leading" secondItem="9qP-zF-QVX" secondAttribute="leading" constant="48" id="qWA-jE-5O1"/>
                             <constraint firstItem="9qP-zF-QVX" firstAttribute="trailing" secondItem="j1a-mY-fOj" secondAttribute="trailing" constant="16" id="sUa-wF-QmF"/>
                             <constraint firstItem="Ya7-va-hwJ" firstAttribute="top" secondItem="9qP-zF-QVX" secondAttribute="top" constant="16" id="zjn-Ww-ti7"/>
+                            <constraint firstItem="9qP-zF-QVX" firstAttribute="trailing" secondItem="oRZ-eZ-jOl" secondAttribute="trailing" constant="16" id="zsM-he-626"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="b8L-2U-YLz"/>

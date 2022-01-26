@@ -51,6 +51,8 @@ class PhotoController: UIViewController, UICollectionViewDelegate {
         return UIMenu(
             title: "",
             children: [
+                // Those items are probably a no go to be validated by apple
+                /*
                 UIAction(
                     title: NSLocalizedString("menu.share", comment: ""),
                     image: nil,
@@ -65,6 +67,7 @@ class PhotoController: UIViewController, UICollectionViewDelegate {
                         
                     openAppStore()
                 }),
+                */
                 UIAction(
                     title: NSLocalizedString("menu.preferences", comment: ""),
                     image: nil,

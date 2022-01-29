@@ -44,20 +44,6 @@
             </meta-data>
         </provider>
 
-        <!-- Fix build for sdk >= 12 -->
-        <activity
-            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
-            android:exported="true"
-            tools:node="merge"/>
-        <activity
-            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
-            android:exported="true"
-            tools:node="merge"/>
-        <activity
-            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
-            android:exported="true"
-            tools:node="merge"/>
-        <!-- -->
     </application>
 
 </manifest>

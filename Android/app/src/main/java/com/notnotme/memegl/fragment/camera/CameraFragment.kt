@@ -77,7 +77,10 @@ import com.notnotme.memegl.fragment.camera.CameraFragmentViewModel.Companion.Cam
 import com.notnotme.memegl.fragment.camera.CameraFragmentViewModel.Companion.CameraType
 import com.notnotme.memegl.fragment.share.ShareFragmentViewModel.Companion.MediaType
 import com.notnotme.memegl.renderer.GLRecorderSurfaceView
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

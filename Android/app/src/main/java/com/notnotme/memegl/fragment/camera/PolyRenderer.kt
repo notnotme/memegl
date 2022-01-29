@@ -37,7 +37,6 @@ import com.notnotme.memegl.renderer.GLRecorderSurfaceView
 import com.notnotme.memegl.renderer.graphic.*
 import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.Sprite
 import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.setPosition
-import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.setSTUV
 import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.setScale
 import com.notnotme.memegl.renderer.graphic.PolySpriteBuffer.Companion.setSize
 import java.nio.ByteBuffer

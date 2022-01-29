@@ -255,7 +255,11 @@ class GLRecorderSurfaceView : SurfaceView {
      * @param runnable - the runnable to queue
      */
     fun queueEvent(runnable: Runnable) {
-        mARRenderThread?.mRunnableQueue?.add(runnable)
+        mARRenderThread?.let {
+            synchronized(it.mRunnableQueueLock) {
+                it.mRunnableQueue.add(runnable)
+            }
+        }
     }
 
     fun stop() {
@@ -317,11 +321,12 @@ class GLRecorderSurfaceView : SurfaceView {
 
     private inner class ARRenderThread : Thread(), SurfaceHolder.Callback2 {
         val mLoop = AtomicBoolean(false)
+        val mRunnableQueue = LinkedList<Runnable>()
+        val mRunnableQueueLock = Any()
         var mEGLDisplay: EGLDisplay? = null
         var mEGLContext: EGLContext? = null
         var mEGLSurface: EGLSurface? = null
         var mEGLSurfaceMedia: EGLSurface? = null
-        val mRunnableQueue = Collections.synchronizedList(LinkedList<Runnable>())
         var config = intArrayOf(
             EGL14.EGL_RED_SIZE, 5,
             EGL14.EGL_GREEN_SIZE, 6,
@@ -394,7 +399,7 @@ class GLRecorderSurfaceView : SurfaceView {
                     shouldRender = true
                 }
 
-                synchronized(mRunnableQueue) {
+                synchronized(mRunnableQueueLock) {
                     if (mRunnableQueue.isNotEmpty()) {
                         mRunnableQueue.iterator().run {
                             while (hasNext()) {
@@ -441,7 +446,7 @@ class GLRecorderSurfaceView : SurfaceView {
         private fun cleanup() {
             Log.d(TAG, "Cleanup")
 
-            synchronized(mRunnableQueue) {
+            synchronized(mRunnableQueueLock) {
                 if (mRunnableQueue.isNotEmpty()) {
                     Log.w(TAG, "Runnable queue is not empty, removing ${mRunnableQueue.size} element(s)")
                     mRunnableQueue.iterator().run {

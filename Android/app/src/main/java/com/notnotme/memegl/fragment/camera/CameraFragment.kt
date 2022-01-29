@@ -85,6 +85,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 @androidx.camera.core.ExperimentalGetImage
+@androidx.camera.camera2.interop.ExperimentalCamera2Interop
 class CameraFragment : Fragment(R.layout.fragment_camera) {
 
     companion object {
@@ -240,38 +241,38 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                 }
             }
 
-            viewModel.producedFile.observe(viewLifecycleOwner, { event ->
+            viewModel.producedFile.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let { file ->
                     when (viewModel.cameraMode.value!!) {
                         CameraMode.VIDEO -> navigateToShare(file.absolutePath, MediaType.VIDEO)
                         CameraMode.PHOTO -> navigateToShare(file.absolutePath, MediaType.PHOTO)
                     }
                 }
-            })
+            }
 
-            viewModel.cameraMode.observe(viewLifecycleOwner, { mode ->
+            viewModel.cameraMode.observe(viewLifecycleOwner) { mode ->
                 showCameraModeSwitch(mode)
-            })
+            }
 
-            viewModel.isUserFaceVisible.observe(viewLifecycleOwner, { visible ->
+            viewModel.isUserFaceVisible.observe(viewLifecycleOwner) { visible ->
                 it.noFaceBanner.visibility = if (visible) View.GONE else View.VISIBLE
-            })
+            }
 
-            viewModel.isMaskSelectorVisible.observe(viewLifecycleOwner, { visible ->
+            viewModel.isMaskSelectorVisible.observe(viewLifecycleOwner) { visible ->
                 showMaskSelector(visible)
-            })
+            }
 
-            viewModel.error.observe(viewLifecycleOwner, { event ->
+            viewModel.error.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let { message ->
                     showError(message)
                 }
-            })
+            }
 
-            viewModel.mask.observe(viewLifecycleOwner, { mask ->
+            viewModel.mask.observe(viewLifecycleOwner) { mask ->
                 val maskAdapter = it.maskSelector.adapter as MaskAdapter
                 maskAdapter.setSelected(mask.ordinal)
                 loadMask(mask)
-            })
+            }
         }
 
         // We override the back button behavior in some case
@@ -303,10 +304,10 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
     override fun onResume() {
         super.onResume()
         configureCameraSelectorButton()
-        viewModel.cameraType.observe(viewLifecycleOwner, {
+        viewModel.cameraType.observe(viewLifecycleOwner) {
             binding?.cameraSelectorButton?.isEnabled = false
             requestCameraPermission(it)
-        })
+        }
     }
 
     override fun onPause() {
@@ -719,12 +720,11 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                             }
                             request.provideSurface(
                                 Surface(cameraSurface),
-                                ContextCompat.getMainExecutor(requireContext()),
-                                { result ->
-                                    result.surface.release()
-                                    Log.d(TAG, "Surface released.")
-                                }
-                            )
+                                ContextCompat.getMainExecutor(requireContext())
+                            ) { result ->
+                                result.surface.release()
+                                Log.d(TAG, "Surface released.")
+                            }
                         }
                     }
 
@@ -753,12 +753,13 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                             }
                         }
 
-                        analysis.setAnalyzer(analyzerExecutor, { imageProxy ->
+                        analysis.setAnalyzer(analyzerExecutor) { imageProxy ->
                             when (val image = imageProxy.image) {
                                 null -> imageProxy.close()
                                 else -> {
                                     val inputImageRotation = imageProxy.imageInfo.rotationDegrees
-                                    val inputImage = InputImage.fromMediaImage(image, inputImageRotation)
+                                    val inputImage =
+                                        InputImage.fromMediaImage(image, inputImageRotation)
 
                                     successListener.rotation = -inputImageRotation.toFloat()
                                     completeListener.imageProxy = imageProxy
@@ -768,7 +769,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                                         .addOnCompleteListener(completeListener)
                                 }
                             }
-                        })
+                        }
                     }
 
                 try {

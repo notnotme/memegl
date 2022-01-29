@@ -100,19 +100,19 @@ class PolySpriteBuffer {
     private val vertexBuffer: ByteBuffer = ByteBuffer.allocateDirect(CAPACITY * BYTES_PER_VERTEX)
         .order(ByteOrder.nativeOrder())
         .also {
-            vertexPositionOffset = it.asFloatBuffer();
+            vertexPositionOffset = it.asFloatBuffer()
             it.position(BYTES_PER_POSITION)
 
-            vertexTextureOffset = it.asFloatBuffer();
+            vertexTextureOffset = it.asFloatBuffer()
             it.position(BYTES_PER_POSITION + BYTES_PER_TEXTURE)
 
-            vertexColorOffset = it.asFloatBuffer();
+            vertexColorOffset = it.asFloatBuffer()
             it.position(BYTES_PER_POSITION + BYTES_PER_TEXTURE + BYTES_PER_COLOR)
 
-            vertexTranslateOffset = it.asFloatBuffer();
+            vertexTranslateOffset = it.asFloatBuffer()
             it.position(BYTES_PER_POSITION + BYTES_PER_TEXTURE + BYTES_PER_COLOR + BYTES_PER_TRANSLATE)
 
-            vertexScaleOffset = it.asFloatBuffer();
+            vertexScaleOffset = it.asFloatBuffer()
             it.position(BYTES_PER_POSITION + BYTES_PER_TEXTURE + BYTES_PER_COLOR + BYTES_PER_TRANSLATE + BYTES_PER_SCALE)
 
             vertexRotationOffset = it.asFloatBuffer()

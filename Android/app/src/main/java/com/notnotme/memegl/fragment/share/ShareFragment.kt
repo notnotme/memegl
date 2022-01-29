@@ -79,7 +79,7 @@ class ShareFragment : Fragment(R.layout.fragment_share) {
                 it.video.start()
             }
 
-            viewModel.media.observe(viewLifecycleOwner, { event ->
+            viewModel.media.observe(viewLifecycleOwner) { event ->
                 event.peekContent().let { media ->
                     when (media.type) {
                         MediaType.PHOTO -> {
@@ -92,13 +92,13 @@ class ShareFragment : Fragment(R.layout.fragment_share) {
                         }
                     }
                 }
-            })
+            }
 
-            viewModel.error.observe(viewLifecycleOwner, { event ->
+            viewModel.error.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let { message ->
                     showError(message)
                 }
-            })
+            }
         }
 
         viewModel.load(args.mediaType, File(args.filename))

@@ -474,7 +474,6 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                 withContext(Dispatchers.Main) {
                     binding?.let {
                         it.cameraButton.isEnabled = true
-                        it.cameraScale.isEnabled = true
                         it.cameraModeSwitch.isEnabled = true
                         it.cameraSelectorButton.isEnabled = true
                         it.maskSelectorButton.isEnabled = true
@@ -489,7 +488,6 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
             it.cameraButton.isEnabled = false
             it.progressBar.visibility = View.VISIBLE
             it.cameraModeSwitch.isEnabled = false
-            it.cameraScale.isEnabled = false
             it.cameraSelectorButton.isEnabled = false
             it.maskSelectorButton.isEnabled = false
         }

@@ -130,13 +130,6 @@ open class PolyRenderer(
     private var recorderWidth = 0
     private var recorderHeight = 0
 
-    private val frameBufferSprite = Sprite().also {
-        it.setSize(width.toFloat(), height.toFloat())
-
-        // Rendered surface result in a inverted texture, fix it now.
-        it.setSTUV(0.0f, 1.0f, 1.0f, 0.0f)
-    }
-
     fun setUpdateTexture(update: Boolean) {
         updateCameraTexture.set(update)
     }
@@ -216,7 +209,6 @@ open class PolyRenderer(
                 GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, cameraTexture.textureId)
             }
 
-
             GLES20.glEnable(GLES20.GL_BLEND)
             GLES20.glBlendEquationSeparate(GLES20.GL_FUNC_ADD, GLES20.GL_FUNC_ADD)
             GLES20.glBlendFuncSeparate(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA, GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)
@@ -248,10 +240,10 @@ open class PolyRenderer(
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, offScreenFrameBuffer.textureId)
         GLES20.glDisable(GLES20.GL_BLEND)
 
-        frameBufferSprite.run {
+        spriteHolder.framebuffer.run {
             val scale = when (imageZoom) {
-                true -> screenWidth / frameBufferSprite.size.w   // Needed to fill the entire screen space in height
-                else -> screenHeight / frameBufferSprite.size.h     // Needed to fill the entire screen space in width
+                true -> screenWidth / size.w   // Needed to fill the entire screen space in height
+                else -> screenHeight / size.h     // Needed to fill the entire screen space in width
             }
 
             // Keep aspect ratio by applying same scaling value to X and Y and center on screen
@@ -264,7 +256,7 @@ open class PolyRenderer(
             spriteShader.setTexture(0)
             spriteShader.setMatrix(renderMVP)
             reset()
-            putSprite(frameBufferSprite)
+            putSprite(spriteHolder.framebuffer)
             render()
         }
     }
@@ -285,10 +277,10 @@ open class PolyRenderer(
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, offScreenFrameBuffer.textureId)
         GLES20.glDisable(GLES20.GL_BLEND)
 
-        frameBufferSprite.run {
+        spriteHolder.framebuffer.run {
             val scale = when (imageZoom) {
-                true -> recorderWidth / frameBufferSprite.size.w   // Needed to fill the entire screen space in height
-                else -> recorderHeight / frameBufferSprite.size.h     // Needed to fill the entire screen space in width
+                true -> recorderWidth / size.w   // Needed to fill the entire screen space in height
+                else -> recorderHeight / size.h     // Needed to fill the entire screen space in width
             }
 
             // Keep aspect ratio by applying same scaling value to X and Y and center on screen
@@ -301,7 +293,7 @@ open class PolyRenderer(
             spriteShader.setTexture(0)
             spriteShader.setMatrix(recordMVP)
             reset()
-            putSprite(frameBufferSprite)
+            putSprite(spriteHolder.framebuffer)
             render()
         }
     }
@@ -425,8 +417,8 @@ open class PolyRenderer(
 
             // Add an offset to each position to center it on the render surface, to match
             // the landmark position of the current mask
-            val offsetX = (frameBufferSprite.size.w * 0.5f) - (spriteHolder.mask.size.w * 0.5f)
-            val offsetY = (frameBufferSprite.size.h * 0.5f) - (spriteHolder.mask.size.h * 0.5f)
+            val offsetX = (spriteHolder.framebuffer.size.w * 0.5f) - (spriteHolder.mask.size.w * 0.5f)
+            val offsetY = (spriteHolder.framebuffer.size.h * 0.5f) - (spriteHolder.mask.size.h * 0.5f)
 
             face.getLandmark(FaceLandmark.RIGHT_EYE)?.let { landmark ->
                 spriteHolder.rightEye.apply {

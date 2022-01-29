@@ -232,6 +232,7 @@ open class PolyRenderer(
         }
 
         // Render offscreen buffer on the device screen
+        GLES20.glFlush()
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0)
         GLES20.glViewport(0, 0, screenWidth, screenHeight)
         GLES20.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a)

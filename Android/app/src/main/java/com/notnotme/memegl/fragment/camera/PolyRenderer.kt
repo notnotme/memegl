@@ -473,8 +473,7 @@ open class PolyRenderer(
             val bitmap = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
             val buffer = ByteBuffer.allocateDirect(imageWidth * imageHeight * 4)
 
-            // We don't take the whole framebuffer, instead, we crop to the image size
-            // from the center of it
+            // We don't take the whole framebuffer, instead, we cut to the image size
             GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, offScreenFrameBuffer.frameBufferId)
             GLES20.glReadPixels(
                 (spriteHolder.mask.position.x - (imageWidth * 0.5f)).toInt(),

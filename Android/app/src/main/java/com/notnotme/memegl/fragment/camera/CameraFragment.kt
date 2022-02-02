@@ -507,7 +507,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
 
                 val context = requireContext()
                 videoFile = File(context.filesDir, TEMP_FILENAME_VIDEO).also {
-                    initRecorder(it, CAMERA_PREVIEW_WIDTH, CAMERA_PREVIEW_HEIGHT,
+                    initRecorder(it, PolyRenderer.FRAMEBUFFER_WIDTH, PolyRenderer.FRAMEBUFFER_HEIGHT,
                         { _, what, extra -> Log.e(TAG, "Error: $what $extra") },
                         { _, what, extra -> Log.e(TAG, "Info: $what $extra") })
 

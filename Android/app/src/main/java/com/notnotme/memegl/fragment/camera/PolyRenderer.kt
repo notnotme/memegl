@@ -45,13 +45,15 @@ import java.util.concurrent.atomic.AtomicBoolean
 open class PolyRenderer(
     private var surfaceView: GLRecorderSurfaceView?,
     private val imageZoom: Boolean,
-    private val width: Int,
-    private val height: Int,
+    private val cameraWidth: Int,
+    private val cameraHeight: Int,
     private val isFrontCamera: Boolean
 ) : GLRecorderSurfaceView.RendererCallbacks {
 
     companion object {
         const val TAG = "PolyRenderer"
+        const val FRAMEBUFFER_WIDTH = 720
+        const val FRAMEBUFFER_HEIGHT = 1280
 
         private const val LERP_VALUE = 4.0f // * delta time
         private const val CIRCLE_PRECISION = 16 // segments from 360°
@@ -109,11 +111,11 @@ open class PolyRenderer(
             size = mouthSize
         ),
         mask = Sprite(
-            position = Position(width / 2.0f, height / 2.0f),
+            position = Position(FRAMEBUFFER_WIDTH * 0.5f, FRAMEBUFFER_HEIGHT * 0.5f),
             size = Size(1.0f, 1.0f)
         ),
         framebuffer = Sprite(
-            size = Size(width.toFloat(), height.toFloat()),
+            size = Size(FRAMEBUFFER_WIDTH.toFloat(), FRAMEBUFFER_HEIGHT.toFloat()),
             // Rendered surface result in a inverted texture, fix it now.
             texture = STUV(0.0f, 1.0f, 1.0f, 0.0f)
         ),
@@ -147,8 +149,8 @@ open class PolyRenderer(
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
 
         spriteBuffer.initialize()
-        offScreenFrameBuffer.create(width, height)
-        cameraTexture.createOES(width, height, GLES20.GL_LINEAR, GLES20.GL_CLAMP_TO_EDGE)
+        offScreenFrameBuffer.create(FRAMEBUFFER_WIDTH, FRAMEBUFFER_HEIGHT)
+        cameraTexture.createOES(cameraWidth, cameraHeight, GLES20.GL_LINEAR, GLES20.GL_CLAMP_TO_EDGE)
         maskTexture.createRGB565(1, 1, GLES20.GL_LINEAR, GLES20.GL_CLAMP_TO_EDGE)
 
         Matrix.orthoM(offscreenMVP, 0, 0.0f, offScreenFrameBuffer.width.toFloat(), offScreenFrameBuffer.height.toFloat(), 0.0f, 0.0f, 1.0f)
@@ -303,21 +305,21 @@ open class PolyRenderer(
         val texelWidth = 1.0f / cameraTexture.height
         val texelHeight = 1.0f / cameraTexture.width
 
-        val width = spriteInfo.size.w * 0.5f
-        val height = spriteInfo.size.h * 0.5f
-        val widthInTexture = (spriteInfo.size.w * texelWidth) * 0.5f
-        val heightInTexture = (spriteInfo.size.h * texelHeight) * 0.5f
+        val widthInPixels = spriteInfo.size.w * 0.5f
+        val heightInPixels = spriteInfo.size.h * 0.5f
+        val widthInTexels = widthInPixels * texelWidth
+        val heightInTexels = heightInPixels * texelHeight
 
         // Depending if the front or back camera is used, texture orientation
         // is mirrored and we need to adjust it
         val xPositionInTexture = when {
-            isFrontCamera -> 1.0f - spriteInfo.texturePosition.x / cameraTexture.height
-            else -> spriteInfo.texturePosition.x / cameraTexture.height
+            isFrontCamera -> 1.0f - (spriteInfo.texturePosition.y * texelWidth)
+            else -> spriteInfo.texturePosition.y * texelWidth
         }
 
         val yPositionInTexture = when {
-            isFrontCamera -> spriteInfo.texturePosition.y / cameraTexture.width
-            else -> 1.0f - spriteInfo.texturePosition.y / cameraTexture.width
+            isFrontCamera -> spriteInfo.texturePosition.x * texelHeight
+            else -> 1.0f - (spriteInfo.texturePosition.x * texelHeight)
         }
 
         var step = 0.0f
@@ -347,10 +349,10 @@ open class PolyRenderer(
             )
 
             spriteBuffer.putVertex(
-                s * width,
-                c * height,
-                xPositionInTexture + (s * widthInTexture) * textureScale,
-                yPositionInTexture + (c * heightInTexture) * textureScale,
+                s * widthInPixels,
+                c * heightInPixels,
+                xPositionInTexture + (s * widthInTexels) * textureScale,
+                yPositionInTexture + (c * heightInTexels) * textureScale,
                 1.0f,
                 1.0f,
                 1.0f,
@@ -363,10 +365,10 @@ open class PolyRenderer(
             )
 
             spriteBuffer.putVertex(
-                s1 * width,
-                c1 * height,
-                xPositionInTexture + (s1 * widthInTexture) * textureScale,
-                yPositionInTexture + (c1 * heightInTexture) * textureScale,
+                s1 * widthInPixels,
+                c1 * heightInPixels,
+                xPositionInTexture + (s1 * widthInTexels) * textureScale,
+                yPositionInTexture + (c1 * heightInTexels) * textureScale,
                 1.0f,
                 1.0f,
                 1.0f,
@@ -504,20 +506,17 @@ open class PolyRenderer(
         if (updateCameraTexture.get()) {
             spriteInfo.apply {
                 //val distance = MathUtils.dist(spriteInfo.position.x, spriteInfo.position.y, textureTargetPositionX, textureTargetPositionY)
-                when (texturePosition.x) {
-                    0.0f /* || distance > 256 */ -> {
-                        texturePosition.set(
-                            textureNewPosition.y,
-                            textureNewPosition.x
-                        )
-                    }
-                    else -> {
-                        // If we moved just a bit, move the sprites to the right place using a linear interpolation
-                        texturePosition.set(
-                            MathUtils.lerp(texturePosition.x, textureNewPosition.y, LERP_VALUE * delta),
-                            MathUtils.lerp(texturePosition.y, textureNewPosition.x, LERP_VALUE * delta)
-                        )
-                    }
+                if (texturePosition.x == 0.0f) {
+                    texturePosition.set(
+                        textureNewPosition.x,
+                        textureNewPosition.y
+                    )
+                } else {
+                    // If we moved just a bit, move the sprites to the right place using a linear interpolation
+                    texturePosition.set(
+                        MathUtils.lerp(texturePosition.x, textureNewPosition.x, LERP_VALUE * delta),
+                        MathUtils.lerp(texturePosition.y, textureNewPosition.y, LERP_VALUE * delta)
+                    )
                 }
             }
         }

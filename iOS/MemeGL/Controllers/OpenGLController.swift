@@ -251,6 +251,7 @@ class OpenGLController: GLKViewRecordableController {
         backgroundColor.w = Float(a)
         
         // setup OpenGL for 2D rendering
+        glDisable(GLenum(GL_CULL_FACE))
         glDisable(GLenum(GL_DEPTH_TEST))
         glDepthMask(GLboolean(GL_FALSE))
         glEnable(GLenum(GL_TEXTURE_2D))
@@ -436,13 +437,13 @@ class OpenGLController: GLKViewRecordableController {
         let texelWidth = 1.0 / Float(cameraTexture.width)
         let texelHeight = 1.0 / Float(cameraTexture.height)
 
-        let width = Float(spriteInfo.size.x) * 0.5
-        let height = Float(spriteInfo.size.y) * 0.5
-        let widthInTexture = (Float(spriteInfo.size.x) * texelWidth) * 0.5
-        let heightInTexture = (Float(spriteInfo.size.y) * texelHeight) * 0.5
+        let widthInPixels = Float(spriteInfo.size.x) * 0.5
+        let heightInPixels = Float(spriteInfo.size.y) * 0.5
+        let widthInTexels = widthInPixels * texelWidth
+        let heightInTexels = heightInPixels * texelHeight
 
-        let xPositionInTexture = 1.0 - spriteInfo.texturePosition.y / Float(cameraTexture.width)
-        let yPositionInTexture = spriteInfo.texturePosition.x / Float(cameraTexture.height)
+        let xPositionInTexture = 1.0 - spriteInfo.texturePosition.y * texelWidth
+        let yPositionInTexture = spriteInfo.texturePosition.x * texelHeight
 
         // Draw a sprite with N vertices doing a circle shape
         var step = Float(0.0)
@@ -472,10 +473,10 @@ class OpenGLController: GLKViewRecordableController {
             )
 
             spriteBuffer.putVertex(
-                s * width,
-                c * height,
-                xPositionInTexture + (s * widthInTexture) * textureScale,
-                yPositionInTexture + (c * heightInTexture) * textureScale,
+                s * widthInPixels,
+                c * heightInPixels,
+                xPositionInTexture + (s * widthInTexels) * textureScale,
+                yPositionInTexture + (c * heightInTexels) * textureScale,
                 1,
                 1,
                 1,
@@ -488,10 +489,10 @@ class OpenGLController: GLKViewRecordableController {
             )
 
             spriteBuffer.putVertex(
-                s1 * width,
-                c1 * height,
-                xPositionInTexture + (s1 * widthInTexture) * textureScale,
-                yPositionInTexture + (c1 * heightInTexture) * textureScale,
+                s1 * widthInPixels,
+                c1 * heightInPixels,
+                xPositionInTexture + (s1 * widthInTexels) * textureScale,
+                yPositionInTexture + (c1 * heightInTexels) * textureScale,
                 1,
                 1,
                 1,

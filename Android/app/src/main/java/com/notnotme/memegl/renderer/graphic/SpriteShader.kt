@@ -49,14 +49,13 @@ open class SpriteShader : SpriteShaderBase() {
                      0.0, vScale.y, 0.0,
                      0.0, 0.0, 1.0);
                 
-                mat4 translate_mat = mat4
-                    (1.0, 0.0, 0.0, 0.0,
-                     0.0, 1.0, 0.0, 0.0,
-                     0.0, 0.0, 1.0, 0.0,
-                     vTranslate.x, vTranslate.y, 0.0, 1.0);
+                mat3 translate_mat = mat3
+                    (1.0, 0.0, 0.0,
+                     0.0, 1.0, 0.0,
+                     vTranslate.x, vTranslate.y, 0.0);
                 
-                vec4 transformed = translate_mat * vec4(rotate_mat * scale_mat * vec3(vPosition.xy, 0.0), 1.0);
-                gl_Position  = uMat * transformed;
+                vec3 transformed = translate_mat * rotate_mat * scale_mat * vec3(vPosition, 1.0f);
+                gl_Position  = uMat * vec4(transformed, 1.0f);
                 v_color      = vColor;
                 v_texCoords  = vTexture;
             }

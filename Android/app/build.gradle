@@ -12,7 +12,7 @@ android {
         applicationId 'com.notnotme.memegl'
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 26
+        versionCode 27
         versionName '49.3'
         testInstrumentationRunner = 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField 'Boolean', 'STRICT_MODE', 'false'

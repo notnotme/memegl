@@ -51,10 +51,10 @@ final class SpriteProgram {
                  0.0, 1.0, 0.0,
                  vTranslate.x, vTranslate.y, 0.0);
                 
-            vec3 transformed = translate_mat * rotate_mat * scale_mat * vec3(vPosition, 1.0f);
-            gl_Position  = uMat * vec4(transformed, 1.0f);
-            v_color      = vColor;
-            v_texCoords  = vTexture;
+            vec3 transformed = translate_mat * rotate_mat * scale_mat * vec3(vPosition, 1.0);
+            gl_Position = uMat * vec4(transformed, 1.0);
+            v_color = vColor;
+            v_texCoords = vTexture;
         }
         """
     
